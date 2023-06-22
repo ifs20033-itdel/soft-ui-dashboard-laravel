@@ -2,7 +2,7 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-  <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
+  <!-- <div class="main-content position-relative bg-gray-100 max-height-vh-100 h-100">
     <div class="container-fluid">
       <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
         <span class="mask bg-gradient-primary opacity-6"></span>
@@ -23,8 +23,8 @@
                 CEO / Co-Founder
               </p>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+          </div> -->
+          <!-- <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
             <div class="nav-wrapper position-relative end-0">
               <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
                 <li class="nav-item">
@@ -382,7 +382,7 @@
       </div>
       @include('layouts.footers.auth.footer')
     </div>
-  </div>
+  </div> -->
 
 @endsection
 
