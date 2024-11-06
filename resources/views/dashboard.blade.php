@@ -1,6 +1,10 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+<head>
+  <!-- Other meta tags and CSS files -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
 
   <div class="row">
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
@@ -9,16 +13,15 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Money</p>
-                <h5 class="font-weight-bolder mb-0">
-                  $53,000
-                  <span class="text-success text-sm font-weight-bolder">+55%</span>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Welcome</p>
+                <h5 class="font=weight-bolder mb-0">
+                  {{Auth :: user()->name}}
                 </h5>
               </div>
             </div>
             <div class="col-4 text-end">
               <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="ni ni-money-coins text-lg opacity-10" aria-hidden="true"></i>
+              <i class="fas fa-user-circle icon-sm opacity-10" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -31,16 +34,38 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Today's Users</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Tanggal : </p>
                 <h5 class="font-weight-bolder mb-0">
-                  2,300
-                  <span class="text-success text-sm font-weight-bolder">+3%</span>
+                  <span id="current-date"></span>
+                  <script>
+        function updateDate() {
+        var currentDate = new Date();
+
+        // Mengambil komponen tanggal
+        var day = currentDate.getDate();
+        var month = currentDate.getMonth() + 1; // Ingat, bulan dimulai dari 0
+        var year = currentDate.getFullYear();
+
+        // Format tanggal dengan menambahkan nol di depan jika digit tunggal
+        day = day < 10 ? '0' + day : day;
+        month = month < 10 ? '0' + month : month;
+
+        // Menampilkan tanggal yang diperbarui di elemen dengan ID "current-date"
+        document.getElementById('current-date').innerHTML = day + '-' + month + '-' + year;
+
+        // Mengatur pembaruan tanggal setiap detik (1000 ms)
+        setTimeout(updateDate, 1000);
+        }
+
+        // Memanggil fungsi updateDate untuk pertama kali
+        updateDate();
+        </script>
                 </h5>
               </div>
             </div>
             <div class="col-4 text-end">
               <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+              <i class="fas fa-calendar-alt icon-sm opacity-10" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -53,16 +78,39 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">New Clients</p>
-                <h5 class="font-weight-bolder mb-0">
-                  +3,462
-                  <span class="text-danger text-sm font-weight-bolder">-2%</span>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Waktu : </p>
+                <h5 class="font=weight-bolder mb-0">
+                <span id="current-time"></span>
+                <script>
+                function updateTime() {
+                var currentTime = new Date();
+                var hours = currentTime.getHours();
+                var minutes = currentTime.getMinutes();
+                var seconds = currentTime.getSeconds();
+                var ampm = hours >= 12 ? 'PM' : 'AM';
+
+                // Format waktu dengan menambahkan nol di depan jika digit tunggal
+                hours = hours % 12;
+                hours = hours ? hours : 12; // 0 jam dianggap 12 jam
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                // Menampilkan waktu yang diperbarui di elemen dengan ID "current-time"
+                document.getElementById('current-time').innerHTML = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+
+                // Mengatur pembaruan waktu setiap detik (1000 ms)
+                setTimeout(updateTime, 1000);
+                }
+
+                // Memanggil fungsi updateTime untuk pertama kali
+                updateTime();
+              </script>
                 </h5>
               </div>
             </div>
             <div class="col-4 text-end">
               <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+              <i class="fas fa-clock icon-sm opacity-10" aria-hidden="true"></i>
               </div>
             </div>
           </div>
@@ -75,10 +123,44 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Sales</p>
-                <h5 class="font-weight-bolder mb-0">
-                  $103,430
-                  <span class="text-success text-sm font-weight-bolder">+5%</span>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Hari ini :</p>
+                <h5 class="font=weight-bolder mb-0"
+                <span id="current-day"></span>
+                <script>
+                function getDayName(dayIndex){
+                    const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+                    return days[dayIndex];
+                  }
+
+                function updateTime(){
+                    var currentTime = new Date();
+                    var hours = currentTime.getHours();
+                    var minutes = currentTime.getMinutes();
+                    var seconds = currentTime.getSeconds();
+                    var ampm = hours >= 12 ? 'PM' : 'AM';
+                    hours = hours %12;
+                    hours = hours ? hours : 12;
+                    minutes = minutes < 10 ? '0' + minutes : minutes;
+                    seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                    document.getElementById('current-time').innerHTML = hours + ':' + minutes + ':' + seconds + '' + ampm;
+
+                   // Mendapatkan indeks hari saat ini (0 = Minggu, 1 = Senin, dst.)
+                    var dayIndex = currentTime.getDay();
+                  // Mendapatkan nama hari berdasarkan indeks
+                    var dayName = getDayName(dayIndex);
+
+                  // Menampilkan nama hari yang diperbarui di elemen dengan ID "current-day"
+                    document.getElementById('current-day').innerHTML = dayName;
+
+                // Mengatur pembaruan waktu setiap detik (1000 ms)
+                  setTimeout(updateTime, 1000);
+                  }
+
+                // Memanggil fungsi updateTime untuk pertama kali
+                  updateTime();
+
+                </script>
                 </h5>
               </div>
             </div>
@@ -92,50 +174,66 @@
       </div>
     </div>
   </div>
-  <div class="row mt-4">
-    <div class="col-lg-7 mb-lg-0 mb-4">
-      <div class="card">
-        <div class="card-body p-3">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="d-flex flex-column h-100">
-                <p class="mb-1 pt-2 text-bold">Built by developers</p>
-                <h5 class="font-weight-bolder">Soft UI Dashboard</h5>
-                <p class="mb-5">From colors, cards, typography to complex elements, you will find the full documentation.</p>
-                <a class="text-body text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
-                  Read More
-                  <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-            <div class="col-lg-5 ms-auto text-center mt-5 mt-lg-0">
-              <div class="bg-gradient-primary border-radius-lg h-100">
-                <img src="../assets/img/shapes/waves-white.svg" class="position-absolute h-100 w-50 top-0 d-lg-block d-none" alt="waves">
-                <div class="position-relative d-flex align-items-center justify-content-center h-100">
-                  <img class="w-100 position-relative z-index-2 pt-4" src="../assets/img/illustrations/rocket-white.png" alt="rocket">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-5">
-      <div class="card h-100 p-3">
-        <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../assets/img/ivancik.jpg');">
-          <span class="mask bg-gradient-dark"></span>
-          <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
-            <h5 class="text-white font-weight-bolder mb-4 pt-2">Work with the rockets</h5>
-            <p class="text-white">Wealth creation is an evolutionarily recent positive-sum game. It is all about who take the opportunity first.</p>
-            <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto" href="javascript:;">
-              Read More
-              <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
-            </a>
-          </div>
+  </div>
+  <div class="row">
+  <div class="col-lg-6">
+    <div class="card h-100 p-3">
+      <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../assets/img/ivancik.jpg');">
+        <span class="mask bg-gradient-dark"></span>
+        <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
+          <h5 class="text-white font-weight-bolder mb-4 pt-2">Tentang Telkom</h5>
+          <p class="text-white">
+            PT Telkom Indonesia (Persero) Tbk (Telkom) adalah Badan Usaha Milik Negara (BUMN) yang bergerak di bidang jasa layanan teknologi informasi dan komunikasi (TIK) dan jaringan telekomunikasi di Indonesia.
+            <span class="text-hidden">Pemegang saham mayoritas Telkom adalah Pemerintah Republik Indonesia sebesar 52.09%, sedangkan 47.91% sisanya dikuasai oleh publik. Saham Telkom diperdagangkan di Bursa Efek Indonesia (BEI) dengan kode “TLKM” dan New York Stock Exchange (NYSE) dengan kode “TLK”.</span>
+          </p>
+          <a class="text-white text-sm font-weight-bold mb-0 icon-move-right mt-auto read-more-btn" href="javascript:;">
+            Read More
+            <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
+          </a>
         </div>
       </div>
     </div>
   </div>
+
+<style>
+  /* CSS untuk mengatur teks yang disembunyikan */
+  .text-hidden {
+    display: none;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: clip;
+    max-width: 100%; /* Atur lebar sesuai kebutuhan */
+  }
+</style>
+
+<script>
+  const readMoreBtn = document.querySelector('.read-more-btn');
+  const hiddenText = document.querySelector('.text-hidden');
+
+  let isHidden = true; // Variable untuk menyimpan status teks (sembunyikan/tampilkan)
+
+  readMoreBtn.addEventListener('click', function() {
+    if (isHidden) {
+      hiddenText.style.display = 'block'; // Menampilkan teks yang sebelumnya disembunyikan
+      readMoreBtn.innerHTML = 'Read Less <i class="fas fa-arrow-up text-sm ms-1" aria-hidden="true"></i>'; // Mengganti teks pada tombol
+    } else {
+      hiddenText.style.display = 'none'; // Menyembunyikan teks
+      readMoreBtn.innerHTML = 'Read More <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>'; // Mengganti teks pada tombol
+    }
+
+    isHidden = !isHidden; // Toggle status teks (sembunyikan/tampilkan)
+  });
+</script>
+
+
+  <div class="col-lg-6">
+    <div class="card h-100 p-3">
+      <div class="embed-responsive embed-responsive-1by9">
+      <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/XAGb7XVLvWw" allowfullscreen="" data-gtm-yt-inspected-2340190_699="true" id="240632615" style="width: 100%; height: 131%;"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
   <div class="row mt-4">
     <div class="col-lg-5 mb-lg-0 mb-4">
       <div class="card z-index-2">

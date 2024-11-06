@@ -1,0 +1,10 @@
+body {
+    background-color: #ffffff; /* Warna latar belakang default */
+    color: #000000; /* Warna teks default */
+    transition: background-color 0.5s ease;
+}
+
+body.dark-mode {
+    background-color: #333333; /* Warna latar belakang dark mode */
+    color: #ffffff; /* Warna teks dark mode */
+}
